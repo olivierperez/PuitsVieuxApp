@@ -12,18 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import fr.o80.design.PuitsVieuxTheme
+import fr.o80.puitsvieux.choose.PizzasScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PuitsVieuxTheme(darkTheme = true) {
+            PuitsVieuxTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    PizzasScreen(
+                        Modifier.fillMaxSize()
+                    )
                 }
             }
         }
