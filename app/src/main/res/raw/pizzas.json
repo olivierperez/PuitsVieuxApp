@@ -1,0 +1,209 @@
+{
+  "pizzas": [
+    {
+      "name": "Authentique",
+      "price": "13,50",
+      "elements": "tomate - mozzarella - gorgonzola - roquette - parmesan - tomates cerise - perlines de mozzarella"
+    },
+    {
+      "name": "Black & White",
+      "price": "12,00",
+      "elements": "Nutella - banane - sucre glace"
+    },
+    {
+      "name": "Bolognaise",
+      "price": "12,00",
+      "elements": "tomate - viande - aromates - mozzarella"
+    },
+    {
+      "name": "Bordelaise",
+      "price": "13,00",
+      "elements": "crème de cèpes - ravioles - mozzarella - lardons - crème"
+    },
+    {
+      "name": "Botanique",
+      "price": "13,80",
+      "elements": "crème d'artichaut - artichaut persillés - mozzarella - tomates cerise - perlines de mozzarella - olives"
+    },
+    {
+      "name": "Bressane",
+      "price": "12,00",
+      "elements": "crème - poulet - mozzarella - pesto"
+    },
+    {
+      "name": "Bretonne",
+      "price": "11,50",
+      "elements": "crème - jambon - artichaut - mozzarella"
+    },
+    {
+      "name": "Campagnarde",
+      "price": "11,00",
+      "elements": "tomate - oeufs battus - lardons - mozzarella"
+    },
+    {
+      "name": "Capricieuse",
+      "price": "11,00",
+      "elements": "tomate - poivrons - oignons - mozzarella"
+    },
+    {
+      "name": "Carbonara",
+      "price": "10,50",
+      "elements": "tomate - jambon - mozzarella"
+    },
+    {
+      "name": "Champignon",
+      "price": "10,00",
+      "elements": "tomate - champignons - mozzarella"
+    },
+    {
+      "name": "Chef",
+      "price": "12,00",
+      "elements": "tomate - champignons - mozzarella - chorizo - lardons - crème"
+    },
+    {
+      "name": "Chevretine",
+      "price": "10,50",
+      "elements": "tomate - mozzarella - chèvre"
+    },
+    {
+      "name": "Cht'i",
+      "price": "13,00",
+      "elements": "oignons - crème - mozzarella - lardons - maroilles"
+    },
+    {
+      "name": "Délice",
+      "price": "11,50",
+      "elements": "tomate - jambon cru - oeuf - mozzarella"
+    },
+    {
+      "name": "Dessert",
+      "price": "12,50",
+      "elements": "amandes - noisettes - noix - pralines - crème - sucre glace"
+    },
+    {
+      "name": "Enfant",
+      "price": "6,50",
+      "elements": "tomate - jambon - mozzarella"
+    },
+    {
+      "name": "Escargot",
+      "price": "12,50",
+      "elements": "tomate - persillade - escargots - mozzarella"
+    },
+    {
+      "name": "Florentine",
+      "price": "12,00",
+      "elements": "mozzarella - crème - gorgonzola - coppa - noix"
+    },
+    {
+      "name": "Fermière",
+      "price": "12,00",
+      "elements": "mozzarella - chèvre - gorgonzola - crème - miel"
+    },
+    {
+      "name": "Forestière",
+      "price": "11,00",
+      "elements": "champignons - lardons - mozzarella - crème"
+    },
+    {
+      "name": "Fromagère",
+      "price": "12,00",
+      "elements": "tomate - mozzarella - chèvre & bleu"
+    },
+    {
+      "name": "Fruits de mer",
+      "price": "11,80",
+      "elements": "tomate - fruits de mer - olives - mozzarella"
+    },
+    {
+      "name": "Gourmande",
+      "price": "11,80",
+      "elements": "tomate - champignons - jambon - mozzarella"
+    },
+    {
+      "name": "Lyonnaise",
+      "price": "12,80",
+      "elements": "crème - oignons - andouille - moutarde - mozzarella"
+    },
+    {
+      "name": "Maison",
+      "price": "11,50",
+      "elements": "tomate - mortadelle - chorizo - jambon - mozzarella"
+    },
+    {
+      "name": "Marguerita",
+      "price": "10,00",
+      "elements": "tomate - mozzarella - olives"
+    },
+    {
+      "name": "Milanaise",
+      "price": "14,00",
+      "elements": "tomate - mozzarella - coppa - roquette - tomate cerise - fromage de brebis - perlines de mozzarella"
+    },
+    {
+      "name": "Montagnarde",
+      "price": "13,00",
+      "elements": "crème de cèpes - pommes de terre - mozzarella - diots de savoie"
+    },
+    {
+      "name": "Norvégienne",
+      "price": "12,50",
+      "elements": "saumon - crème - mozzarella"
+    },
+    {
+      "name": "Orientale",
+      "price": "11,80",
+      "elements": "tomate - poulet - merguez - mozzarella"
+    },
+    {
+      "name": "Parmigianna",
+      "price": "12,80",
+      "elements": "tomate - mozzarella - boeuf haché - aubergines grillés - parmesan rapé"
+    },
+    {
+      "name": "Pervenche",
+      "price": "11,80",
+      "elements": "tomate - aubergines - poulet - mozzarella - olives"
+    },
+    {
+      "name": "Quatre Saisons",
+      "price": "11,00",
+      "elements": "tomate - oignons - poivrons - champignons - aubergines - mozzarella"
+    },
+    {
+      "name": "Québécoise",
+      "price": "13,50",
+      "elements": "Crème - Mozzarella - Bacon - Chèvre - Cramberry - Noix de pécan - Confiture de Cramberry - Sirop d'érable"
+    },
+    {
+      "name": "Romaine",
+      "price": "10,50",
+      "elements": "tomate - anchois - olives - mozzarella"
+    },
+    {
+      "name": "Roquefort",
+      "price": "10,80",
+      "elements": "tomate - mozzarella - roquefort"
+    },
+    {
+      "name": "Savoyarde",
+      "price": "12,50",
+      "elements": "pommes de terre - lardons - oignons - crème - mozzarella - reblochon"
+    },
+    {
+      "name": "Spéciale",
+      "price": "11,00",
+      "elements": "oignons - lardons - crème - mozzarella"
+    },
+    {
+      "name": "Tartufo",
+      "price": "14,50",
+      "elements": "Crème de pecorino truffé - Mozzarella fior di latte - Roquette - Jambon - Pecorino truffé"
+    },
+    {
+      "name": "Tonus",
+      "price": "12,50",
+      "elements": "tomate - mozzarella - bacon - brie - crème"
+    }
+  ]
+}
