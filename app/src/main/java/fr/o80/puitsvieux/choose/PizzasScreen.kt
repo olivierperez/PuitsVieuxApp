@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -21,6 +23,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -28,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.o80.design.PuitsVieuxTheme
+import fr.o80.design.TreeDots
 import fr.o80.puitsvieux.collectAsStateLifecycleAware
 import fr.o80.puitsvieux.data.Pizza
 import java.math.BigDecimal
@@ -72,6 +76,7 @@ private fun PizzaList(
         LazyColumn(
             modifier.padding(paddingValues),
             verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(16.dp)
         ) {
             item {
@@ -79,6 +84,13 @@ private fun PizzaList(
                     "Les Pizzas du puits vieux",
                     style = MaterialTheme.typography.h2,
                     textAlign = TextAlign.Center
+                )
+            }
+            item {
+                TreeDots(
+                    Modifier
+                        .width(200.dp)
+                        .height(48.dp)
                 )
             }
             items(pizzas, key = { pizza -> pizza.name }) { pizza ->
