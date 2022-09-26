@@ -7,7 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.o80.puitsvieux.data.Pizza
 import fr.o80.puitsvieux.data.PizzaListProvider
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,46 +22,78 @@ class PizzaListViewModel @Inject constructor(
     pizzaListProvider: PizzaListProvider
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<PizzaListState> = MutableStateFlow(PizzaListState.empty())
+    private val pizzas: MutableStateFlow<List<Pizza>> = MutableStateFlow(emptyList())
+    private val selectedElements: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    private val error: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val callPizzeria: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-    val state: StateFlow<PizzaListState> = _state
+    val state: StateFlow<PizzaListState> =
+        combine(
+            pizzas,
+            selectedElements,
+            error,
+            callPizzeria
+        ) { pizzas, selectedElements, error, callPizzeria ->
+            PizzaListState(
+                pizzas = pizzas.map { it.toUiModel(selectedElements) },
+                callPizzeria = callPizzeria,
+                canCallPizzeria = pizzas.isNotEmpty(),
+                hasError = error
+            )
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5_000),
+            PizzaListState.empty()
+        )
 
     init {
         viewModelScope.launch {
             try {
                 val pizzas = pizzaListProvider.fetch()
-                _state.update {
-                    it.copy(
-                        pizzas = pizzas,
-                        hasError = false,
-                        canCallPizzeria = true
-                    )
-                }
+                this@PizzaListViewModel.pizzas.update { pizzas }
+                error.update { false }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to get pizzas", e)
-                _state.update {
-                    it.copy(
-                        pizzas = emptyList(),
-                        hasError = true,
-                        canCallPizzeria = false
-                    )
-                }
+                error.update { true }
             }
         }
     }
 
     fun callPizzeria() {
-        _state.update { it.copy(callPizzeria = true) }
+        callPizzeria.update { true }
     }
 
     fun onPizzeriaCalled() {
-        _state.update { it.copy(callPizzeria = false) }
+        callPizzeria.update { false }
+    }
+
+    fun onElementClicked(element: ElementUiModel) {
+        selectedElements.update { previouslySelected ->
+            if (element.selected) {
+                previouslySelected.filterNot { it == element.name }
+            } else {
+                previouslySelected + element.name
+            }
+        }
     }
 
 }
 
+fun Pizza.toUiModel(selectedElements: List<String>): PizzaUiModel {
+    return PizzaUiModel(
+        name,
+        price,
+        elements.map {
+            ElementUiModel(
+                it,
+                it in selectedElements
+            )
+        }
+    )
+}
+
 data class PizzaListState(
-    val pizzas: List<Pizza>,
+    val pizzas: List<PizzaUiModel>,
     val canCallPizzeria: Boolean,
     val callPizzeria: Boolean,
     val hasError: Boolean

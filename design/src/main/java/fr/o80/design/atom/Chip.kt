@@ -1,46 +1,57 @@
 package fr.o80.design.atom
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FilterChip
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.o80.design.PuitsVieuxTheme
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun Chip(
-    modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
+    onClick: () -> Unit,
+    selected: Boolean,
+    content: @Composable RowScope.() -> Unit
 ) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(6.dp),
-        border = BorderStroke(
-            width = .3.dp,
-            color = MaterialTheme.colors.secondary.copy(alpha = .5f),
-        ),
-        contentColor = MaterialTheme.colors.secondary
-    ) {
-        Box(
-            modifier = Modifier.padding(4.dp),
-            content = content
-        )
-    }
+    val borderColor by animateColorAsState(
+        targetValue = if (selected) MaterialTheme.colors.primary else Color.Transparent
+    )
+
+    FilterChip(
+        onClick = onClick,
+        selected = selected,
+        shape = MaterialTheme.shapes.small,
+        border = BorderStroke(1.dp, borderColor),
+        content = content
+    )
 }
 
 @Preview
 @Composable
 fun ChipPreview() {
     PuitsVieuxTheme {
-        Chip {
-            Text("This is a chip")
+        Column {
+            Chip(
+                onClick = {},
+                selected = false
+            ) {
+                Text("This is a chip")
+            }
+            Chip(
+                onClick = {},
+                selected = true
+            ) {
+                Text("Selected one")
+            }
         }
     }
 }

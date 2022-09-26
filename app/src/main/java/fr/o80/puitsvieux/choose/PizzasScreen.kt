@@ -37,7 +37,6 @@ import fr.o80.design.PuitsVieuxTheme
 import fr.o80.design.TreeDots
 import fr.o80.design.atom.Chip
 import fr.o80.puitsvieux.collectAsStateLifecycleAware
-import fr.o80.puitsvieux.data.Pizza
 import java.math.BigDecimal
 import java.text.DecimalFormat
 
@@ -61,15 +60,21 @@ fun PizzasScreen(
 
     when {
         state.hasError -> Text("An error occurred!", modifier)
-        else -> PizzaList(modifier, state.pizzas, viewModel::callPizzeria)
+        else -> PizzaList(
+            modifier,
+            state.pizzas,
+            viewModel::callPizzeria,
+            viewModel::onElementClicked
+        )
     }
 }
 
 @Composable
 private fun PizzaList(
     modifier: Modifier,
-    pizzas: List<Pizza>,
-    callPizzeria: () -> Unit
+    pizzas: List<PizzaUiModel>,
+    callPizzeria: () -> Unit,
+    onElementClicked: (ElementUiModel) -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -99,14 +104,17 @@ private fun PizzaList(
                 )
             }
             items(pizzas, key = { pizza -> pizza.name }) { pizza ->
-                PizzaCard(pizza)
+                PizzaCard(pizza, onElementClicked)
             }
         }
     }
 }
 
 @Composable
-private fun PizzaCard(pizza: Pizza) {
+private fun PizzaCard(
+    pizza: PizzaUiModel,
+    onElementClicked: (ElementUiModel) -> Unit
+) {
     val formatter = remember { DecimalFormat("#0.00€") }
     Card {
         Column(
@@ -119,16 +127,17 @@ private fun PizzaCard(pizza: Pizza) {
             }
             Spacer(Modifier.size(4.dp))
             FlowRow(
-                mainAxisSpacing = 4.dp,
-                crossAxisSpacing = 4.dp
+                mainAxisSpacing = 8.dp
             ) {
-                pizza.elements.forEach {
-                    Chip {
-                        Text(it)
+                pizza.elements.forEach { element ->
+                    Chip(
+                        onClick = { onElementClicked(element) },
+                        selected = element.selected
+                    ) {
+                        Text(element.name)
                     }
                 }
             }
-//            Text(pizza.elements.joinToString(", "))
         }
     }
 }
@@ -138,7 +147,16 @@ private fun PizzaCard(pizza: Pizza) {
 fun PizzasCardPreview() {
     PuitsVieuxTheme {
         PizzaCard(
-            Pizza("Margarita", BigDecimal.ZERO, listOf("tomate", "crème", "salade"))
+            PizzaUiModel(
+                "Margarita",
+                BigDecimal.ZERO,
+                listOf(
+                    ElementUiModel("tomate", true),
+                    ElementUiModel("crème", false),
+                    ElementUiModel("salade", false),
+                )
+            ),
+            onElementClicked = {}
         )
     }
 }
@@ -150,11 +168,43 @@ fun PizzasListPreview() {
         PizzaList(
             Modifier,
             listOf(
-                Pizza("Margarita", BigDecimal.valueOf(13.45), listOf("tomate", "crème", "salade")),
-                Pizza("Calzone", BigDecimal.valueOf(27.95), listOf("tomate", "oeuf", "salade")),
-                Pizza("Ananas", BigDecimal.valueOf(95.27), listOf("tomate", "ananas", "salade")),
+                PizzaUiModel(
+                    "Margarita",
+                    BigDecimal.valueOf(13.45),
+                    listOf(
+                        ElementUiModel("tomate", false),
+                        ElementUiModel("crème", true),
+                        ElementUiModel("salade", true),
+                    )
+                ),
+                PizzaUiModel(
+                    "Calzone",
+                    BigDecimal.valueOf(27.95),
+                    listOf(
+                        ElementUiModel("tomate", false),
+                        ElementUiModel("oeuf", false),
+                        ElementUiModel("salade", true),
+                    )
+                ),
+                PizzaUiModel(
+                    "Ananas",
+                    BigDecimal.valueOf(95.27),
+                    listOf(
+                        ElementUiModel("crème", true),
+                        ElementUiModel("ananas", false),
+                        ElementUiModel("marron", false),
+                        ElementUiModel("marron1", false),
+                        ElementUiModel("marron2", false),
+                        ElementUiModel("marron3", false),
+                        ElementUiModel("marron4", false),
+                        ElementUiModel("marron6", false),
+                        ElementUiModel("marron7", false),
+                        ElementUiModel("marron8", false),
+                    )
+                ),
             ),
-            callPizzeria = {}
+            callPizzeria = {},
+            onElementClicked = {}
         )
     }
 }
