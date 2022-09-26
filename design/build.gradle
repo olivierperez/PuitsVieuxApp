@@ -49,6 +49,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.25.1"
+    api "com.google.accompanist:accompanist-flowlayout:0.25.1"
 
     // Tests
     testImplementation "junit:junit:4.13.2"

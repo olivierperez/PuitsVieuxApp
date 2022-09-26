@@ -1,4 +1,4 @@
-package fr.o80.puitsvieux.data
+package fr.o80.puitsvieux.data.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

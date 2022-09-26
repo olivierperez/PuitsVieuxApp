@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,8 +32,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.flowlayout.FlowRow
 import fr.o80.design.PuitsVieuxTheme
 import fr.o80.design.TreeDots
+import fr.o80.design.atom.Chip
 import fr.o80.puitsvieux.collectAsStateLifecycleAware
 import fr.o80.puitsvieux.data.Pizza
 import java.math.BigDecimal
@@ -114,7 +117,18 @@ private fun PizzaCard(pizza: Pizza) {
                 Spacer(Modifier.weight(1f))
                 Text(formatter.format(pizza.price), style = MaterialTheme.typography.h5)
             }
-            Text(pizza.elements)
+            Spacer(Modifier.size(4.dp))
+            FlowRow(
+                mainAxisSpacing = 4.dp,
+                crossAxisSpacing = 4.dp
+            ) {
+                pizza.elements.forEach {
+                    Chip {
+                        Text(it)
+                    }
+                }
+            }
+//            Text(pizza.elements.joinToString(", "))
         }
     }
 }
@@ -124,7 +138,7 @@ private fun PizzaCard(pizza: Pizza) {
 fun PizzasCardPreview() {
     PuitsVieuxTheme {
         PizzaCard(
-            Pizza("Margarita", BigDecimal.ZERO, "tomate - crème - salade")
+            Pizza("Margarita", BigDecimal.ZERO, listOf("tomate", "crème", "salade"))
         )
     }
 }
@@ -136,9 +150,9 @@ fun PizzasListPreview() {
         PizzaList(
             Modifier,
             listOf(
-                Pizza("Margarita", BigDecimal.valueOf(13.45), "tomate - crème - salade"),
-                Pizza("Calzone", BigDecimal.valueOf(27.95), "tomate - oeuf - salade"),
-                Pizza("Ananas", BigDecimal.valueOf(95.27), "tomate - ananas - salade"),
+                Pizza("Margarita", BigDecimal.valueOf(13.45), listOf("tomate", "crème", "salade")),
+                Pizza("Calzone", BigDecimal.valueOf(27.95), listOf("tomate", "oeuf", "salade")),
+                Pizza("Ananas", BigDecimal.valueOf(95.27), listOf("tomate", "ananas", "salade")),
             ),
             callPizzeria = {}
         )

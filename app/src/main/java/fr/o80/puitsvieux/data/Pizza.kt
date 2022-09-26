@@ -1,5 +1,7 @@
 package fr.o80.puitsvieux.data
 
+import fr.o80.puitsvieux.data.serializer.BigDecimalSerializer
+import fr.o80.puitsvieux.data.serializer.ElementsSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.math.BigDecimal
@@ -14,5 +16,6 @@ data class Pizza(
     val price: BigDecimal,
 
     @SerialName("elements")
-    val elements: String
+    @Serializable(with = ElementsSerializer::class)
+    val elements: List<String>
 )
