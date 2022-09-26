@@ -36,7 +36,13 @@ class PizzaListViewModel @Inject constructor(
                 _state.update { it.copy(pizzas = pizzas, hasError = false, canCallPizzeria = true) }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to get pizzas", e)
-                _state.update { it.copy(pizzas = emptyList(), hasError = true, canCallPizzeria = false) }
+                _state.update {
+                    it.copy(
+                        pizzas = emptyList(),
+                        hasError = true,
+                        canCallPizzeria = false
+                    )
+                }
             }
         }
     }

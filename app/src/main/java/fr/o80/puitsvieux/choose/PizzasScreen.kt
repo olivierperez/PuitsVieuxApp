@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -35,6 +36,7 @@ import fr.o80.design.TreeDots
 import fr.o80.puitsvieux.collectAsStateLifecycleAware
 import fr.o80.puitsvieux.data.Pizza
 import java.math.BigDecimal
+import java.text.DecimalFormat
 
 @Composable
 fun PizzasScreen(
@@ -102,6 +104,7 @@ private fun PizzaList(
 
 @Composable
 private fun PizzaCard(pizza: Pizza) {
+    val formatter = remember { DecimalFormat("#0.00€") }
     Card {
         Column(
             Modifier.padding(8.dp)
@@ -109,7 +112,7 @@ private fun PizzaCard(pizza: Pizza) {
             Row {
                 Text(pizza.name, style = MaterialTheme.typography.h4)
                 Spacer(Modifier.weight(1f))
-                Text(pizza.price.toString() + "€", style = MaterialTheme.typography.h5)
+                Text(formatter.format(pizza.price), style = MaterialTheme.typography.h5)
             }
             Text(pizza.elements)
         }
